@@ -40,12 +40,11 @@ const getRandomArrayElement = function (elements) {
   return elements[getRandomInt(0, elements.length - 1)];
 };
 
-const getRandomFillArry = function (array, values) {
+const getRandomFillArray = function (array, values) {
   const newArray = [];
   for (let i = 0; i < values; i++) {
     newArray.push(array[i]);
   }
-
   return newArray;
 }
 
@@ -65,7 +64,7 @@ let createHousInfo = function () {
       guests: getRandomInt(1, 10),
       checkin: getRandomArrayElement(CHECKIN),
       checkout: getRandomArrayElement(CHECKOUT),
-      features: getRandomFillArry(FEATURES, getRandomInt(1, FEATURES.length)),
+      features: getRandomFillArray(FEATURES, getRandomInt(0, FEATURES.length - 1)),
       description: getRandomArrayElement(DESCRIPTIONS),
       photos: getRandomArrayElement(PHOTOS),
     },
@@ -76,6 +75,8 @@ let createHousInfo = function () {
   }
 }
 
-const similarHousInfo = new Array(SIMILAR_HOUSE_INFO_COUNT).fill(null).map(() => createHousInfo());
+const similarHousInfo = new Array(SIMILAR_HOUSE_INFO_COUNT).fill(null).map(function () {
+  return createHousInfo();
+});
 
 similarHousInfo;
