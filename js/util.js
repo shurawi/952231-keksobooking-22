@@ -1,4 +1,4 @@
-import {TITLES, TYPES, CHECKIN, CHECKOUT, FEATURES, DESCRIPTIONS, PHOTOS, SIMILAR_HOUSE_INFO_COUNT} from './data.js';
+import {TITLES, TYPES, CHECKIN, CHECKOUT, FEATURES, DESCRIPTIONS, PHOTOS, SIMILAR_HOUSE_INFO_COUNT, OFFER_TYPE} from './data.js';
 
 let getRandomIntDot = function (min, max, dot) { //getRandomIntDot - возвращающает случайное число с плавающей точкой из переданного диапазона включительно
   if (min < 0 || max < 0 || min > max || dot <= 0 ) {
@@ -25,8 +25,6 @@ const getRandomFillArray = function (array, values) {
   return newArray;
 }
 
-
-
 const createHousInfo = function () {
   const randomImgNumber = getRandomIntDot(1, 8);
   const randomX = getRandomIntDot(35.65, 35.7, 5);
@@ -39,7 +37,7 @@ const createHousInfo = function () {
     offer: {
       title: getRandomArrayElement(TITLES),
       address: `${randomX}, ${randomY}`,
-      price: getRandomIntDot(50, 1500) + '$',
+      price: getRandomIntDot(50, 1500),
       type: getRandomArrayElement(TYPES),
       rooms: getRandomIntDot(1, 5),
       guests: getRandomIntDot(1, 10),
@@ -55,7 +53,27 @@ const createHousInfo = function () {
     },
   }
 }
+const createSimilarArray = function (arrayCount) {
+  const similarArray = new Array(arrayCount).fill(null).map(() => createHousInfo());
+  return similarArray;
+}
+const similarHousInfo = createSimilarArray(SIMILAR_HOUSE_INFO_COUNT);
 
-const similarHousInfo = new Array(SIMILAR_HOUSE_INFO_COUNT).fill(null).map(() => createHousInfo());
+const getOfferType = (TYPES) => {// Функция, возвращающая тип жилья
+  switch (TYPES) {
+    case 'flat':
+      return 'Квартира';
+    case 'bungalow':
+      return 'Бунгало';
+    case 'house':
+      return 'Дом';
+    case 'palace':
+      return 'Дворец';
+    default:
+      return 'Любой тип жилья';
+  }
+};
 
-export {similarHousInfo};
+const offerType = getOfferType(TYPES[OFFER_TYPE]);
+
+export {similarHousInfo, offerType, getOfferType};

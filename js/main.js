@@ -1,3 +1,5 @@
 import {similarHousInfo} from './util.js';
+import {createOfferElement} from './card.js';
 
-similarHousInfo;
+const [firstItem] = similarHousInfo;
+createOfferElement(firstItem);
